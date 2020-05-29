@@ -1,0 +1,15 @@
+/*Nazwiska pracowników i nazw działów, w których są zatrudnieni*/
+
+SELECT pracownik.nazwisko, dzial.nazwa FROM `pracownik` INNER JOIN `dzial` ON pracownik.dzial_id = dzial.id;
+
+/*Nazwy działów i liczbę pracowników w każdym z nich*/
+
+SELECT dzial.nazwa, COUNT(pracownik.id) AS liczba_pracownikow FROM `pracownik` INNER JOIN `dzial` ON pracownik.dzial_id = dzial.id GROUP BY dzial.nazwa;
+
+/*Działów niemających żadnego pracownika (tu domyślam się że chodziło o same nazwy działów)*/
+
+SELECT dzial.nazwa FROM `pracownik` RIGHT OUTER JOIN `dzial` ON pracownik.dzial_id = dzial.id WHERE pracownik.id is NULL;
+
+/*Działów posiadających co najmniej 2 pracowników (tu też podejrzewam że o tylko nazwy chodzi)*/
+
+SELECT dzial.nazwa FROM `pracownik` INNER JOIN `dzial` ON pracownik.dzial_id = dzial.id GROUP BY dzial.nazwa HAVING COUNT(pracownik.id) >= 2;
