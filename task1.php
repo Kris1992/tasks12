@@ -5,8 +5,8 @@ CONST COUNT_CORNERS_WHITESPACES = true;
 
 /**
  * getLongestWord Get the longest word of given arguments
- * @param  mixed ...$words Given arguments
- * @throws Exception Throw Exception when one of given arguments is not string
+ * @param  mixed ...$words  Given arguments
+ * @throws Exception        Throw Exception when one of given arguments is not string
  * @return string
  */
 function getLongestWord(...$words): string

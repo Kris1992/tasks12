@@ -4,7 +4,12 @@ SELECT pracownik.nazwisko, dzial.nazwa FROM `pracownik` INNER JOIN `dzial` ON pr
 
 /*Nazwy działów i liczbę pracowników w każdym z nich*/
 
+/* Pierwszy sposób (nie uwzglednia działów gdzie liczba pracowników jest równa 0) */
 SELECT dzial.nazwa, COUNT(pracownik.id) AS liczba_pracownikow FROM `pracownik` INNER JOIN `dzial` ON pracownik.dzial_id = dzial.id GROUP BY dzial.nazwa;
+
+/*Drugi sposób (MySQL nie obsługuje FULL OUTER JOIN więc musiałem się trochę nagłowić jak to obejść)*/
+
+SELECT dzial.nazwa, COUNT(pracownik.id) AS liczba_pracownikow FROM `pracownik` LEFT JOIN `dzial` ON pracownik.dzial_id = dzial.id GROUP BY dzial.nazwa UNION SELECT dzial.nazwa, COUNT(CASE WHEN pracownik.id = NULL THEN 0 ELSE pracownik.id END) AS liczba_pracownikow FROM `pracownik` RIGHT JOIN `dzial` ON pracownik.dzial_id = dzial.id GROUP BY dzial.nazwa;
 
 /*Działów niemających żadnego pracownika (tu domyślam się że chodziło o same nazwy działów)*/
 
