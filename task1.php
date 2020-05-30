@@ -4,15 +4,19 @@
 CONST COUNT_CORNERS_WHITESPACES = true;
 
 /**
- * getLongestWord Get the longest word of given arguments
+ * getLongestWord Get the longest string of given arguments
  * @param  mixed ...$words  Given arguments
- * @throws Exception        Throw Exception when one of given arguments is not string
- * @return string
+ * @throws Exception        Throw Exception when one of given arguments is not string or if arguments list is empty
+ * @return string           Return string with the longest string from arguments
  */
 function getLongestWord(...$words): string
 {
     $longestWord = null;
     $longestNumberChars = 0;
+
+    if (!$words) {
+        throw new \Exception("You don't pass any arguments.");
+    }
 
     foreach ($words as $word) {
 
@@ -38,7 +42,8 @@ function getLongestWord(...$words): string
 } 
 
 try {
-    $longestWord = getLongestWord('aa', 'b  d', '40 ', 'sdsdads','sadadadsds');
+    //$longestWord = getLongestWord('aa', 'b  d', '40 ', 'sdsdads','sadadadsds');
+    $longestWord = getLongestWord();
     echo $longestWord;
 } catch (\Exception $e) {
     echo $e->getMessage();
